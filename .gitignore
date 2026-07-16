@@ -1,0 +1,16 @@
+# Data files (too large / not for version control)
+*.csv
+*.xlsx
+*.parquet
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
