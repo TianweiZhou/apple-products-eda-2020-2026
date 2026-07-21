@@ -4,7 +4,7 @@
 
 This project analyzes 80,000 price records of Apple products (iPhone, iPad, Mac, Watch — 31 models) on **Amazon and Flipkart India** from Sep 2020 to Jul 2026, answering when to buy, where to buy, and what a "fair price" looks like. A Random Forest model predicts market price with **MAE ≈ $23 (R² 0.99)**, enabling automatic detection of unusually good deals.
 
-📓 Full analysis: [`apple_pricing_analysis.ipynb`](apple_pricing_analysis.ipynb)
+📓 Full analysis: [`Apple_Pricing_EDA.ipynb`](Apple_Pricing_EDA.ipynb)
 
 ## Business Problem
 
@@ -33,12 +33,12 @@ Full test statistics, p-values, and decisions are in Section 13 of the notebook.
 
 A **"fair price" engine**: given launch price, days since launch, platform, category, condition, stock status, and whether a sale is running, the model predicts the expected current market price.
 
-| Model | MAE (USD) | R² |
-|---|---|---|
-| Linear Regression (baseline) | 57.01 | 0.969 |
-| **Random Forest** | **23.12** | **0.993** |
+| Split | R² | RMSE (USD) | MAE (USD) |
+|---|---|---|---|
+| Train | 0.9986 | 17.10 | 10.28 |
+| **Test** | **0.9912** | **42.89** | **27.47** |
 
-Validation uses a **time-based split** (train < Jul 2025, test = last 12 months) to avoid leakage. Launch price and days-since-launch dominate feature importance — depreciation is strongly non-linear, which is why the Random Forest beats the linear baseline.
+Validation uses a **time-based split** (train < Aug 2025, test = last 12 months) to avoid leakage. Launch price and days-since-launch dominate feature importance — depreciation is strongly non-linear, which is why the Random Forest beats the linear baseline.
 
 **Business application:** the residual (predicted fair price − actual price) works as a *deal score*. Listings priced far below the model's estimate are flagged as the best buying opportunities — the notebook ranks the top 10 deals in the test period.
 
